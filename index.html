@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CHA Digital — Marinha do Brasil</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #000;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 0px;
+      color: #444444;
+    }
+
+    .govbr {
+      font-size: 1.1rem;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: -5px;
+      color: #444444;
+    }
+
+    .fingerprint {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .fp-box {
+      position: relative;
+      background: #fff;
+      border: 4px solid #d9d9d9;
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+      height: 180px;
+      box-sizing: border-box;
+    }
+
+    .fp-box img {
+      width: 165px;
+      height: 170px;
+      object-fit: contain;
+      opacity: 1;
+    }
+
+    .fp-bar {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      background: #000;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #6BAA3D;
+      color: white;
+      padding: 12px 20px;
+      font-size: 25px;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .top-left .seta {
+      font-size: 25px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .info-icon {
+      width: 30px;
+      height: 30px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #6BAA3D;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .info {
+      background: #f2f2f2;
+      border: 1px solid #ddd;
+      padding: 10px 40px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #333333;
+      line-height: 1.8;
+    }
+
+    .campo {
+      border-bottom: 1px solid #dcdcdc;
+      padding: 6px 0;
+      font-size: 20px;
+    }
+
+    .campo span {
+      display: block;
+      font-weight: 500;
+      color: #6BAA3D;
+      font-size: 14px;
+    }
+
+    .campo:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-left">
+    <span class="seta" onclick="window.history.back();">&#8592;</span>
+    <span>Detalhamento</span>
+  </div>
+  <div class="info-icon">i</div>
+</div>
+
+<h1>CHA - Carteira de Habilitação de Amador</h1>
+<div class="govbr">Marinha do Brasil</div>
+
+<div class="fingerprint">
+  <div class="fp-box">
+    <img src="" alt="Impressão digital">
+    <div class="fp-bar"></div>
+  </div>
+</div>
+
+<div class="info">
+  <div class="campo"><span>Nome / Name:</span></div>
+  <div class="campo"><span>Data de Nascimento / Date of Birth:</span></div>
+  <div class="campo"><span>Registro Geral-CPF / Personal Number:</span></div>
+  <div class="campo"><span>Categoria (Category):</span></div>
+  <div class="campo"><span>Data de Validade / Date of Expiry:</span></div>
+  <div class="campo"><span>LNº de Inscrição (Registration number):</span></div>
+  <div class="campo"><span>Limites da Navegação (Navigation Limits):</span></div>
+  <div class="campo"><span>Emissor (Issuer):</span></div>
+  <div class="campo"><span>Data de Emissão (Issue Date):</span></div>
+  <div class="campo"><span>Restrições Físicas (Physical Restrictions):</span></div>
+  <div class="campo"><span>Hash:</span></div>
+</div>
+
+<script src="db.js"></script>
+<script>
+  const path = window.location.pathname.split("/");
+  const cpf = path[path.length - 1].replace(/\D/g, "");
+
+  if (cpf && chaUsuarios[cpf]) {
+    const user = chaUsuarios[cpf];
+    const campos = document.querySelectorAll(".campo");
+
+    campos[0].innerHTML = `<span>Nome / Name:</span> ${user.nome}`;
+    campos[1].innerHTML = `<span>Data de Nascimento / Date of Birth:</span> ${user.nascimento}`;
+    campos[2].innerHTML = `<span>Registro Geral-CPF / Personal Number:</span> ${user.cpf}`;
+    campos[3].innerHTML = `<span>Categoria (Category):</span> ${user.categoria}`;
+    campos[4].innerHTML = `<span>Data de Validade / Date of Expiry:</span> ${user.validade}`;
+    campos[5].innerHTML = `<span>LNº de Inscrição (Registration number):</span> ${user.inscricao}`;
+    campos[6].innerHTML = `<span>Limites da Navegação (Navigation Limits):</span> ${user.limites}`;
+    campos[7].innerHTML = `<span>Emissor (Issuer):</span> ${user.emissor}`;
+    campos[8].innerHTML = `<span>Data de Emissão (Issue Date):</span> ${user.emissao}`;
+    campos[9].innerHTML = `<span>Restrições Físicas (Physical Restrictions):</span> ${user.restricoes}`;
+    campos[10].innerHTML = `<span>Hash:</span> ${user.hash}`;
+
+    document.querySelector(".fp-box img").src = user.imagem;
+  } else {
+    document.querySelector(".info").innerHTML =
+      "<div style='text-align:center;color:#c00;'>⚠️ Registro não encontrado</div>";
+  }
+</script>
+
+</body>
+</html>
