@@ -13,6 +13,23 @@ const chaUsuarios = {
     hash: "4d9de49b0a3fe3fb856ec5f0624ca606",
     imagem: "https://i.ibb.co/wZBwczfQ/8b0bba35-0230-48f9-8810-c63e81053ae8-removebg-preview.png"
   }
+  ,
+
+
+    "10367068699": {
+    nome: "MATEUS FELIPE MENEZES OLIVEIRA ",
+    nascimento: "16/09/1999",
+    cpf: "103.670.686-99",
+    categoria: "MOTONAUTA / ARRAIS AMADOR",
+    validade: "05/09/2035",
+    inscricao: "F9211486732136",
+    limites: "INTERIOR / INLAND WATERS",
+    emissor: "CAPITANIA DOS PORTOS",
+    emissao: "05/09/2025",
+    restricoes: "******** / ********",
+    hash: "4d9de49b0a3fe3fb856ec5f0624ca606",
+    imagem: "https://i.ibb.co/NbXvtnv/10367068699-3x4.png"
+  }
 
   // ➕ Adicione outros CPFs aqui
 };
